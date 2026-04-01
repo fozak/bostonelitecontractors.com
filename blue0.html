@@ -49,20 +49,20 @@
 
     /* ── Navbar ── */
     .site-nav {
-      background: var(--c-navy);
+      background: #fff;
       border-bottom: 3px solid var(--c-blue);
-      box-shadow: 0 2px 12px rgba(0,0,0,.18);
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
     }
     .site-nav .nav-link {
-      color: rgba(255,255,255,.85) !important;
+      color: #1e2a40 !important;
       font-weight: 600;
-      font-size: .95rem;
+      font-size: .9rem;
       letter-spacing: .03em;
       padding: 1.1rem .9rem !important;
       text-transform: uppercase;
     }
     .site-nav .nav-link:hover,
-    .site-nav .nav-link.active { color: #7eb3ff !important; }
+    .site-nav .nav-link.active { color: var(--c-blue) !important; }
     .site-nav .dropdown-menu { border-top: 3px solid var(--c-blue); border-radius: 0; }
     .nav-quote {
       background: var(--c-blue) !important;
@@ -100,24 +100,18 @@
     .section-title { font-weight: 800; letter-spacing: -.01em; }
     .section-title span { color: var(--c-blue); }
 
-    /* ── Global font scale 125% ── */
-    html { font-size: 125%; }
-
     /* ── Service cards ── */
     .svc-img { height: 200px; object-fit: cover; width: 100%; }
     .svc-icon {
-      width: 64px; height: 64px;
+      width: 56px; height: 56px;
       background: var(--c-blue);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      color: #fff !important;
-      font-size: 1.4rem;
-      box-shadow: 0 4px 14px rgba(26,86,219,.45);
-      margin: -32px auto 0;
-      position: relative;
-      z-index: 1;
+      color: #fff;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 14px rgba(26,86,219,.35);
+      margin: -28px auto 0;
     }
-    .svc-icon i { color: #fff !important; }
     .card { border: none; box-shadow: 0 2px 12px rgba(0,0,0,.07); }
     .card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.13); transition: box-shadow .25s; }
 
@@ -158,7 +152,7 @@
         <div class="topbar-icon"><i class="fa fa-envelope"></i></div>
         <div>
           <div class="topbar-label">Email Us</div>
-          <div class="topbar-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f49d9a929bb491989d8091979b9a80869597809b8687989897da979b99">[email&#160;protected]</a></div>
+          <div class="topbar-value">info@elitecontractorsllc.com</div>
         </div>
       </div>
       <div class="topbar-item">
@@ -514,4 +508,5 @@
 <div class="footer-bar">
   <div class="container-xl">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-3">
-      <small class="text-white-50">&copy; 2025 <a class="text-primary
+      <small class="text-white-50">&copy; 2025 <a class="text-primary" href="#">Elite Contractors LLC</a>. All Rights Reserved.</small>
+      <small class="bg-primary text-white px-3 py-1 mt-2 mt-md-0
