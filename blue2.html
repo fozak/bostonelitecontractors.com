@@ -49,20 +49,20 @@
 
     /* ── Navbar ── */
     .site-nav {
-      background: #fff;
+      background: var(--c-navy);
       border-bottom: 3px solid var(--c-blue);
-      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      box-shadow: 0 2px 12px rgba(0,0,0,.18);
     }
     .site-nav .nav-link {
-      color: #1e2a40 !important;
+      color: rgba(255,255,255,.85) !important;
       font-weight: 600;
-      font-size: .9rem;
+      font-size: .95rem;
       letter-spacing: .03em;
       padding: 1.1rem .9rem !important;
       text-transform: uppercase;
     }
     .site-nav .nav-link:hover,
-    .site-nav .nav-link.active { color: var(--c-blue) !important; }
+    .site-nav .nav-link.active { color: #7eb3ff !important; }
     .site-nav .dropdown-menu { border-top: 3px solid var(--c-blue); border-radius: 0; }
     .nav-quote {
       background: var(--c-blue) !important;
@@ -100,20 +100,24 @@
     .section-title { font-weight: 800; letter-spacing: -.01em; }
     .section-title span { color: var(--c-blue); }
 
-    html {font-size: 135%;}
+    /* ── Global font scale 125% ── */
+    html { font-size: 125%; }
 
     /* ── Service cards ── */
     .svc-img { height: 200px; object-fit: cover; width: 100%; }
     .svc-icon {
-      width: 56px; height: 56px;
+      width: 64px; height: 64px;
       background: var(--c-blue);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      color: #fff;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 14px rgba(26,86,219,.35);
-      margin: -28px auto 0;
+      color: #fff !important;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 14px rgba(26,86,219,.45);
+      margin: -32px auto 0;
+      position: relative;
+      z-index: 1;
     }
+    .svc-icon i { color: #fff !important; }
     .card { border: none; box-shadow: 0 2px 12px rgba(0,0,0,.07); }
     .card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.13); transition: box-shadow .25s; }
 
@@ -154,7 +158,7 @@
         <div class="topbar-icon"><i class="fa fa-envelope"></i></div>
         <div>
           <div class="topbar-label">Email Us</div>
-          <div class="topbar-value">info@elitecontractorsllc.com</div>
+          <div class="topbar-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f49d9a929bb491989d8091979b9a80869597809b8687989897da979b99">[email&#160;protected]</a></div>
         </div>
       </div>
       <div class="topbar-item">
@@ -445,7 +449,7 @@
             <img src="https://themewagon.github.io/webuild/img/testimonial-1.jpg" class="rounded-circle" width="64" height="64" style="object-fit:cover;" alt="Client 1">
             <div>
               <h5 class="mb-0 text-uppercase">Client Name</h5>
-              <small class="text-muted">Profession3</small>
+              <small class="text-muted">Profession</small>
             </div>
           </div>
           <p class="text-muted mb-0"><i class="fa fa-quote-left text-primary me-2"></i>Dolores sed duo clita tempor justo dolor et stet lorem kasd labore dolore lorem ipsum. At lorem lorem magna ut labore et tempor erat.</p>
@@ -510,5 +514,4 @@
 <div class="footer-bar">
   <div class="container-xl">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-3">
-      <small class="text-white-50">&copy; 2025 <a class="text-primary" href="#">Elite Contractors LLC</a>. All Rights Reserved.</small>
-      <small class="bg-primary text-white px-3 py-1 mt-2 mt-md-0
+      <small class="text-white-50">&copy; 2025 <a class="text-primary
