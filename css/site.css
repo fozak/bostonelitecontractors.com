@@ -108,3 +108,24 @@ section        { padding: 5rem 0; }
 .site-footer a    { color: rgba(255,255,255,.6); text-decoration: none; }
 .site-footer a:hover { color: #7eb3ff; }
 .footer-bar       { background: #070f22; border-top: 3px solid var(--c-blue); }
+
+/* ── Hero ──────────────────────────────────────────────── */
+.hero               { position: relative; height: 580px; overflow: hidden; }
+.hero img           { width: 100%; height: 100%; object-fit: cover; filter: brightness(.45); }
+.hero-caption       { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 1rem; }
+.hero-badge         { display: inline-block; background: var(--c-blue); color: #fff; font-size: .75rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; padding: .35rem 1.2rem; border-radius: 2px; margin-bottom: 1.2rem; }
+
+/* ── Service Cards ─────────────────────────────────────── */
+.svc-img            { height: 200px; object-fit: cover; width: 100%; }
+.svc-icon           { width: 64px; height: 64px; background: var(--c-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff !important; font-size: 1.4rem; box-shadow: 0 4px 14px rgba(26,86,219,.45); margin: -32px auto 0; position: relative; z-index: 1; }
+.svc-icon i         { color: #fff !important; }
+.card               { border: none; box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+.card:hover         { box-shadow: 0 6px 24px rgba(0,0,0,.13); transition: box-shadow .25s; }
+
+/* ── Portfolio Preview ─────────────────────────────────── */
+.port-box           { position: relative; overflow: hidden; border-radius: 6px; }
+.port-box img       { height: 250px; object-fit: cover; width: 100%; display: block; transition: transform .4s; }
+.port-box:hover img { transform: scale(1.05); }
+.port-label         { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(13,27,62,.82); padding: .85rem 1rem; color: #fff; }
+.port-label .h6     { color: #fff; }
+.port-label small   { color: rgba(255,255,255,.7); }
