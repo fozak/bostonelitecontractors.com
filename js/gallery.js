@@ -1,7 +1,7 @@
 // gallery.js — driven by GitHub API, no hardcoded HTML needed
 // Drop new images into /images with the naming convention and they appear automatically.
 
-const GITHUB_API = 'https://api.github.com/repos/fozak/bostonelitecontractors.com/contents/images';
+const GITHUB_API = '/images/gallery.json';
 const RAW_BASE   = 'https://raw.githubusercontent.com/fozak/bostonelitecontractors.com/main/images/';
 const IMAGE_EXTS = /\.(jpg|jpeg|png|gif|webp)$/i;
 const NAMED_RE   = /^([\w-]+?)-(\d+)-(.+)\.(jpg|jpeg|png|gif|webp)$/i;
@@ -49,27 +49,50 @@ function iconFor(cat) {
   return CAT_ICONS[cat] || 'fa-image';
 }
 
+const CACHE_KEY = 'ec_gallery_v1';
+const CACHE_TTL = 60 * 60 * 1000; // 1 hour
+
+function skeletonHTML(n) {
+  return Array.from({length: n}, () =>
+    '<div class="gallery-item" style="background:#e8eaed;min-height:220px;animation:pulse 1.5s ease-in-out infinite;"></div>'
+  ).join('');
+}
+
+const styleEl = document.createElement('style');
+styleEl.textContent = '@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }';
+document.head.appendChild(styleEl);
+
 async function loadGallery() {
   const grid = document.getElementById('galleryGrid');
   const tabsEl = document.querySelector('.filter-tabs');
   if (!grid) return;
 
-  grid.innerHTML = '<div class="text-muted p-4">Loading gallery…</div>';
+  // Show skeletons immediately while fetching
+  grid.innerHTML = skeletonHTML(9);
 
   let files;
+
+  // Try sessionStorage cache first — avoids repeat API calls on reload
   try {
-    const res = await fetch(GITHUB_API);
-    if (!res.ok) throw new Error('GitHub API error: ' + res.status);
-    const all = await res.json();
-    files = all.filter(f =>
-      f.type === 'file' &&
-      IMAGE_EXTS.test(f.name) &&
-      !SKIP.includes(f.name) &&
-      categoryFromName(f.name) !== null
-    );
-  } catch (e) {
-    grid.innerHTML = `<div class="text-danger p-4">Failed to load images: ${e.message}</div>`;
-    return;
+    const cached = sessionStorage.getItem(CACHE_KEY);
+    if (cached) {
+      const { data, ts } = JSON.parse(cached);
+      if (Date.now() - ts < CACHE_TTL) files = data;
+    }
+  } catch (_) {}
+
+  if (!files) {
+    try {
+      const res = await fetch(GITHUB_API);
+      if (!res.ok) throw new Error('GitHub API ' + res.status);
+      const all = await res.json();
+      // gallery.json only contains valid named files — no filtering needed
+      files = all;
+      try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: files, ts: Date.now() })); } catch (_) {}
+    } catch (e) {
+      grid.innerHTML = '<div class="text-danger p-4">Failed to load images: ' + e.message + '</div>';
+      return;
+    }
   }
 
   // Sort by category then by number

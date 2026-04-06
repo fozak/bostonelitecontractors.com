@@ -3,9 +3,13 @@
   --c-blue-dk:#1042a8;
   --c-navy:   #0d1b3e;
   --c-sky:    #e8f0fe;
+
+   /* Override Tabler's tiny default */
+  --tblr-body-font-size: 1rem;
+  --tblr-body-line-height: 1.7;
 }
 
-html { font-size: 125%; }
+/*html { font-size: 125%; }*/
 
 /* ── Buttons ───────────────────────────────────────────── */
 .btn-primary                { background: var(--c-blue)    !important; border-color: var(--c-blue)    !important; }
@@ -129,3 +133,30 @@ section        { padding: 5rem 0; }
 .port-label         { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(13,27,62,.82); padding: .85rem 1rem; color: #fff; }
 .port-label .h6     { color: #fff; }
 .port-label small   { color: rgba(255,255,255,.7); }
+
+/* Add to site.css after the :root block */
+body {
+  font-size: 1rem;        /* 16px base */
+  line-height: 1.7;
+}
+
+p {
+  font-size: 1rem;
+}
+
+.text-muted {
+  font-size: 1rem !important;
+}
+
+/* card body text */
+.card-body p,
+.accordion-body {
+  font-size: 1rem;
+}
+
+/* your small utility — make it less small */
+.text-muted.small,
+p.text-muted.small,
+small {
+  font-size: 0.9rem !important;
+}
