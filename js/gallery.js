@@ -1,10 +1,127 @@
-// Runs after components are ready (lightbox injected by then)
-document.addEventListener('components:ready', initGallery);
+// gallery.js — driven by GitHub API, no hardcoded HTML needed
+// Drop new images into /images with the naming convention and they appear automatically.
+
+const GITHUB_API = 'https://api.github.com/repos/fozak/bostonelitecontractors.com/contents/images';
+const RAW_BASE   = 'https://raw.githubusercontent.com/fozak/bostonelitecontractors.com/main/images/';
+const IMAGE_EXTS = /\.(jpg|jpeg|png|gif|webp)$/i;
+const NAMED_RE   = /^([\w-]+?)-(\d+)-(.+)\.(jpg|jpeg|png|gif|webp)$/i;
+const SKIP       = ['logo.png'];
+
+const CAT_LABELS = {
+  'home-remodeling':           'Home Remodeling',
+  'roofing-siding':            'Roofing & Siding',
+  'interior-repairs':          'Interior Repairs',
+  'landscaping-tree-services': 'Landscaping & Tree',
+  'solar-energy':              'Solar Energy',
+  'consulting':                'Consulting',
+  'pest-control':              'Pest Control',
+};
+
+const CAT_ICONS = {
+  'home-remodeling':           'fa-home',
+  'roofing-siding':            'fa-hard-hat',
+  'interior-repairs':          'fa-paint-roller',
+  'landscaping-tree-services': 'fa-tree',
+  'solar-energy':              'fa-solar-panel',
+  'consulting':                'fa-briefcase',
+  'pest-control':              'fa-bug',
+};
+
+function categoryFromName(filename) {
+  const m = filename.match(NAMED_RE);
+  return m ? m[1] : null;
+}
+
+function titleFromName(filename) {
+  const m = filename.match(NAMED_RE);
+  if (!m) return filename;
+  return m[3]
+    .split('-')
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+}
+
+function labelFor(cat) {
+  return CAT_LABELS[cat] || cat.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+}
+
+function iconFor(cat) {
+  return CAT_ICONS[cat] || 'fa-image';
+}
+
+async function loadGallery() {
+  const grid = document.getElementById('galleryGrid');
+  const tabsEl = document.querySelector('.filter-tabs');
+  if (!grid) return;
+
+  grid.innerHTML = '<div class="text-muted p-4">Loading gallery…</div>';
+
+  let files;
+  try {
+    const res = await fetch(GITHUB_API);
+    if (!res.ok) throw new Error('GitHub API error: ' + res.status);
+    const all = await res.json();
+    files = all.filter(f =>
+      f.type === 'file' &&
+      IMAGE_EXTS.test(f.name) &&
+      !SKIP.includes(f.name) &&
+      categoryFromName(f.name) !== null
+    );
+  } catch (e) {
+    grid.innerHTML = `<div class="text-danger p-4">Failed to load images: ${e.message}</div>`;
+    return;
+  }
+
+  // Sort by category then by number
+  files.sort((a, b) => {
+    const ma = a.name.match(NAMED_RE);
+    const mb = b.name.match(NAMED_RE);
+    if (!ma || !mb) return 0;
+    if (ma[1] !== mb[1]) return ma[1].localeCompare(mb[1]);
+    return parseInt(ma[2]) - parseInt(mb[2]);
+  });
+
+  // Build ordered unique category list (preserving CAT_LABELS order)
+  const catsInFiles = new Set(files.map(f => categoryFromName(f.name)));
+  const orderedCats = Object.keys(CAT_LABELS).filter(c => catsInFiles.has(c));
+  // append any unknown cats not in CAT_LABELS
+  catsInFiles.forEach(c => { if (!CAT_LABELS[c]) orderedCats.push(c); });
+
+  // Render filter buttons
+  if (tabsEl) {
+    tabsEl.innerHTML = `<button class="filter-btn active" data-filter="all">All Projects</button>` +
+      orderedCats.map(cat =>
+        `<button class="filter-btn" data-filter="${cat}">
+          <i class="fa ${iconFor(cat)} me-1"></i>${labelFor(cat)}
+        </button>`
+      ).join('');
+  }
+
+  // Render gallery items
+  grid.innerHTML = files.map(f => {
+    const cat   = categoryFromName(f.name);
+    const title = titleFromName(f.name);
+    const label = labelFor(cat);
+    const src   = RAW_BASE + encodeURIComponent(f.name);
+    const alt   = `${title} — Boston`;
+    return `
+      <div class="gallery-item" data-category="${cat}">
+        <img src="${src}" alt="${alt}" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="zoom-icon"><i class="fa fa-expand"></i></div>
+          <div class="cat-badge">${label}</div>
+          <p class="img-title">${title}</p>
+        </div>
+      </div>`;
+  }).join('');
+
+  // Wire up filter + lightbox
+  initGallery();
+}
 
 function initGallery() {
-  // Filter
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const items = document.querySelectorAll('.gallery-item');
+  const items      = document.querySelectorAll('.gallery-item');
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -18,9 +135,8 @@ function initGallery() {
   });
 
   // Lightbox
-  const lightbox = document.getElementById('lightbox');
+  const lightbox  = document.getElementById('lightbox');
   if (!lightbox) return;
-
   const lbImg     = document.getElementById('lbImg');
   const lbCaption = document.getElementById('lbCaption');
   let visibleItems = [], currentIndex = 0;
@@ -31,19 +147,19 @@ function initGallery() {
 
   items.forEach(item => {
     item.addEventListener('click', () => {
-      visibleItems  = getVisible();
-      currentIndex  = visibleItems.indexOf(item);
+      visibleItems = getVisible();
+      currentIndex = visibleItems.indexOf(item);
       openLightbox(currentIndex);
     });
   });
 
   function openLightbox(idx) {
-    const item    = visibleItems[idx];
-    const img     = item.querySelector('img');
-    lbImg.src     = img.src;
-    lbImg.alt     = img.alt;
-    const badge   = item.querySelector('.cat-badge');
-    const title   = item.querySelector('.img-title');
+    const item  = visibleItems[idx];
+    const img   = item.querySelector('img');
+    lbImg.src   = img.src;
+    lbImg.alt   = img.alt;
+    const badge = item.querySelector('.cat-badge');
+    const title = item.querySelector('.img-title');
     lbCaption.textContent = (badge ? badge.textContent : '') + (title ? ' — ' + title.textContent : '');
     lightbox.classList.add('open');
   }
@@ -70,3 +186,6 @@ function initGallery() {
     if (e.key === 'Escape')     { lightbox.classList.remove('open'); }
   });
 }
+
+// Entry point — wait for components (lightbox) to be ready
+document.addEventListener('components:ready', loadGallery);

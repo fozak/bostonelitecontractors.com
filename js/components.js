@@ -13,7 +13,7 @@ async function loadComponents() {
   const slots = [...document.querySelectorAll('[id^="cmp-"]')];
   await Promise.all(slots.map(loadComponent));
 
-  // Mark active nav link based on current path
+  // Mark active nav link
   const path = location.pathname;
   document.querySelectorAll('.site-nav .nav-link').forEach(link => {
     const href = link.getAttribute('href');
@@ -21,6 +21,14 @@ async function loadComponents() {
     const isMatch = href !== '/' && path.startsWith(href.split('#')[0]) && href.split('#')[0] !== '/';
     if (isHome || isMatch) link.classList.add('active');
   });
+
+  // Re-init Bootstrap collapse for dynamically injected navbar
+  if (window.bootstrap) {
+    document.querySelectorAll('.navbar-toggler').forEach(toggler => {
+      const target = document.querySelector(toggler.dataset.bsTarget);
+      if (target) new bootstrap.Collapse(target, { toggle: false });
+    });
+  }
 
   document.dispatchEvent(new Event('components:ready'));
 }
