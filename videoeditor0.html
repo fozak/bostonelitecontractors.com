@@ -368,21 +368,6 @@
       transition: width .1s linear;
     }
 
-    /* ── Contenteditable styles ──────────────────────────── */
-    [contenteditable] {
-      outline: none;
-      cursor: text;
-      border-radius: 2px;
-      transition: background .15s;
-    }
-    [contenteditable]:hover {
-      background: rgba(255,255,255,.08);
-    }
-    [contenteditable]:focus {
-      background: rgba(255,255,255,.12);
-      outline: 1px dashed rgba(255,255,255,.35);
-    }
-
     /* ── No video placeholder ────────────────────────────── */
     .no-video-hint {
       position: absolute;
@@ -413,7 +398,7 @@
     <span class="tb-label">Video</span>
     <label class="btn-file">
       <i class="fa fa-folder-open"></i> Choose file
-      <input type="file" id="inp-video" accept="video/mp4,video/*">
+      <input type="file" id="inp-video" accept="videos/mp4,videos/*">
     </label>
     <span class="video-name" id="video-name">no file</span>
   </div>
@@ -478,9 +463,7 @@
   </div>
 
   <!-- Real video (hidden until file chosen) -->
-  <video id="main-video" autoplay muted loop playsinline style="display:none">
-    <!-- src set dynamically via file picker — maps to /videos/ on your server -->
-  </video>
+  <video id="main-video" autoplay muted loop playsinline style="display:none"></video>
 
   <!-- Overlay — injected on top of video -->
   <div class="video-cta-overlay" id="overlay">
@@ -488,29 +471,29 @@
     <div class="video-cta-content">
 
       <div class="vcta-el" id="vcta-badge">
-        <span class="badge bg-primary vcta-badge-text" contenteditable="true" spellcheck="false">Chestnut Hill, MA — In Progress</span>
+        <span class="badge bg-primary vcta-badge-text">Chestnut Hill, MA — In Progress</span>
       </div>
 
       <div class="vcta-el" id="vcta-headline">
-        <h1 class="vcta-headline-text fw-bold text-uppercase mb-0" contenteditable="true" spellcheck="false">New Construction</h1>
-        <p class="vcta-sub mb-0" contenteditable="true" spellcheck="false">Foundation · Structural Steel · Framing</p>
+        <h1 class="vcta-headline-text fw-bold text-uppercase mb-0">New Construction</h1>
+        <p class="vcta-sub mb-0">Foundation · Structural Steel · Framing</p>
       </div>
 
       <div class="vcta-el" id="vcta-chips">
         <div class="vcta-chips-wrap">
-          <span class="vcta-chip"><i class="fa fa-map-marker-alt text-primary me-1"></i><span contenteditable="true" spellcheck="false">Chestnut Hill, MA</span></span>
-          <span class="vcta-chip"><i class="fa fa-hard-hat text-primary me-1"></i><span contenteditable="true" spellcheck="false">New Construction</span></span>
-          <span class="vcta-chip"><i class="fa fa-check-circle text-primary me-1"></i><span contenteditable="true" spellcheck="false">Licensed &amp; Insured</span></span>
-          <span class="vcta-chip"><i class="fa fa-file-alt text-primary me-1"></i><span contenteditable="true" spellcheck="false">Permitted</span></span>
+          <span class="vcta-chip"><i class="fa fa-map-marker-alt text-primary me-1"></i>Chestnut Hill, MA</span>
+          <span class="vcta-chip"><i class="fa fa-hard-hat text-primary me-1"></i>New Construction</span>
+          <span class="vcta-chip"><i class="fa fa-check-circle text-primary me-1"></i>Licensed &amp; Insured</span>
+          <span class="vcta-chip"><i class="fa fa-file-alt text-primary me-1"></i>Permitted</span>
         </div>
       </div>
 
       <div class="vcta-el" id="vcta-cta">
         <a href="#" class="btn btn-primary btn-lg px-5 py-3">
-          <span contenteditable="true" spellcheck="false">Get A Free Estimate</span> <i class="fa fa-arrow-right ms-2"></i>
+          Get A Free Estimate <i class="fa fa-arrow-right ms-2"></i>
         </a>
         <a href="tel:8574994440" class="btn btn-outline-light btn-lg px-4 py-3">
-          <i class="fa fa-phone me-2"></i><span contenteditable="true" spellcheck="false">(857) 499-4440</span>
+          <i class="fa fa-phone me-2"></i>(857) 499-4440
         </a>
       </div>
 
