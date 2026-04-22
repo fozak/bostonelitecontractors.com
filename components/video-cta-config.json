@@ -1,67 +1,62 @@
 {
-  "drone": {
-    "video": "/videos/drone-chestnut-hill.mp4",
-    "badge": "Chestnut Hill — In Progress",
-    "headline": "Building Boston's Future",
-    "subline": "Licensed · Insured · On Time",
+  "chestnut": {
+    "video": "/video/chestnut.mp4",
+    "badge": "Chestnut Hill, MA — In Progress",
+    "headline": "New Construction",
+    "sub": "Foundation · Structural Steel · Framing",
     "cta": "Get A Free Estimate",
-    "link": "#contact",
+    "ctaLink": "#contact",
+    "chips": [
+      { "icon": "fa-map-marker-alt", "label": "Chestnut Hill, MA" },
+      { "icon": "fa-hard-hat",       "label": "New Construction"  },
+      { "icon": "fa-check-circle",   "label": "Licensed & Insured"},
+      { "icon": "fa-file-alt",       "label": "Permitted"         }
+    ],
     "timings": {
-      "badge": 1.5,
-      "headline": 3,
-      "cta": 5.5
+      "badge":    1.5,
+      "headline": 3.0,
+      "chips":    4.5,
+      "cta":      6.0
     }
   },
   "roofing": {
-    "video": "/videos/roofing-project.mp4",
-    "badge": "Roofing & Siding",
-    "headline": "Your Roof. Done Right.",
-    "subline": "Full Replacements · Repairs · Siding",
+    "video": "/video/roofing.mp4",
+    "badge": "Boston, MA — Completed",
+    "headline": "Roof Replacement",
+    "sub": "Full Strip · New Shingles · Flashing",
     "cta": "Get A Free Estimate",
-    "link": "#contact",
+    "ctaLink": "#contact",
+    "chips": [
+      { "icon": "fa-map-marker-alt", "label": "Boston, MA"        },
+      { "icon": "fa-hard-hat",       "label": "Roofing & Siding"  },
+      { "icon": "fa-check-circle",   "label": "Licensed & Insured"},
+      { "icon": "fa-file-alt",       "label": "Permitted"         }
+    ],
     "timings": {
-      "badge": 1,
+      "badge":    1.0,
       "headline": 2.5,
-      "cta": 5
+      "chips":    4.0,
+      "cta":      5.5
     }
   },
   "interior": {
-    "video": "/videos/interior-remodel.mp4",
-    "badge": "Kitchen & Bath Remodeling",
-    "headline": "Spaces That Inspire",
-    "subline": "Custom Kitchens · Luxury Bathrooms · Full Renovations",
+    "video": "/video/interior.mp4",
+    "badge": "Newton, MA — Completed",
+    "headline": "Kitchen & Bath Remodel",
+    "sub": "Custom Cabinets · Tile · Open Concept",
     "cta": "View Our Work",
-    "link": "#gallery",
+    "ctaLink": "#gallery",
+    "chips": [
+      { "icon": "fa-map-marker-alt", "label": "Newton, MA"        },
+      { "icon": "fa-home",           "label": "Home Remodeling"   },
+      { "icon": "fa-check-circle",   "label": "Licensed & Insured"},
+      { "icon": "fa-file-alt",       "label": "Permitted"         }
+    ],
     "timings": {
-      "badge": 1,
-      "headline": 3,
-      "cta": 6
-    }
-  },
-  "solar": {
-    "video": "/videos/solar-installation.mp4",
-    "badge": "Solar Energy Solutions",
-    "headline": "Power Your Home Smarter",
-    "subline": "Custom Solar Design · Full Installation · Grid Connection",
-    "cta": "Get A Free Estimate",
-    "link": "#contact",
-    "timings": {
-      "badge": 1,
-      "headline": 2.5,
-      "cta": 5
-    }
-  },
-  "landscaping": {
-    "video": "/videos/landscaping-project.mp4",
-    "badge": "Landscaping & Tree Services",
-    "headline": "Outside Is Everything",
-    "subline": "Tree Removal · Decks · Outdoor Design",
-    "cta": "Get A Free Estimate",
-    "link": "#contact",
-    "timings": {
-      "badge": 1,
-      "headline": 3,
-      "cta": 5.5
+      "badge":    1.0,
+      "headline": 3.0,
+      "chips":    4.5,
+      "cta":      6.0
     }
   }
 }

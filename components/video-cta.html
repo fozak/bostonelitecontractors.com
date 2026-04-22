@@ -1,47 +1,36 @@
-<div class="video-cta-wrap" id="video-cta-root">
-  <div class="video-cta-inner">
+<div class="video-cta-overlay">
 
-    <!-- Video -->
-    <video
-      id="vcta-video"
-      class="video-cta-player"
-      autoplay
-      muted
-      loop
-      playsinline
-    ></video>
+  <div class="video-cta-gradient"></div>
 
-    <!-- Dark gradient overlay -->
-    <div class="video-cta-gradient"></div>
+  <div class="video-cta-content">
 
-    <!-- Overlay elements (hidden initially, revealed by timing) -->
-    <div class="video-cta-overlay">
-
-      <!-- Badge -->
-      <div class="video-cta-badge vcta-el" id="vcta-badge">
-        <span class="badge bg-primary text-uppercase fs-6 px-3 py-2 letter-spacing-wide"></span>
-      </div>
-
-      <!-- Headline -->
-      <div class="video-cta-headline vcta-el" id="vcta-headline">
-        <h2 class="display-4 text-white text-uppercase fw-bold mb-2"></h2>
-        <p class="text-white-75 fs-4 mb-0 vcta-subline"></p>
-      </div>
-
-      <!-- CTA Button -->
-      <div class="video-cta-btn-wrap vcta-el" id="vcta-cta">
-        <a href="#" class="btn btn-primary btn-lg px-5 py-3 vcta-btn">
-          <span class="vcta-btn-text"></span>
-          <i class="fa fa-arrow-right ms-2"></i>
-        </a>
-      </div>
-
+    <div class="vcta-el" id="vcta-badge">
+      <span class="badge bg-primary vcta-badge-text"></span>
     </div>
 
-    <!-- Progress bar -->
-    <div class="video-cta-progress">
-      <div class="video-cta-progress-bar" id="vcta-progress"></div>
+    <div class="vcta-el" id="vcta-headline">
+      <h1 class="vcta-headline-text text-white text-uppercase fw-bold mb-1"></h1>
+      <p class="vcta-sub text-white mb-0"></p>
+    </div>
+
+    <div class="vcta-el" id="vcta-chips">
+      <div class="vcta-chips-wrap"></div>
+    </div>
+
+    <div class="vcta-el" id="vcta-cta">
+      <a href="#contact" class="btn btn-primary btn-lg px-5 py-3 vcta-btn-primary me-2">
+        <span class="vcta-btn-label"></span>
+        <i class="fa fa-arrow-right ms-2"></i>
+      </a>
+      <a href="tel:8574994440" class="btn btn-outline-light btn-lg px-4 py-3">
+        <i class="fa fa-phone me-2"></i>(857) 499-4440
+      </a>
     </div>
 
   </div>
+
+  <div class="video-progress">
+    <div class="video-progress-bar" id="vcta-progress"></div>
+  </div>
+
 </div>

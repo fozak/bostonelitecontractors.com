@@ -1,9 +1,9 @@
 /* ============================================================
    video.css — Elite Contractors LLC
-   Video project page styles — Tabler compatible
+   Timed overlay system over video hero — Tabler compatible
    ============================================================ */
 
-/* ── Video Hero Wrap ─────────────────────────────────────── */
+/* ── Video hero wrapper ──────────────────────────────────── */
 .video-hero {
   position: relative;
   width: 100%;
@@ -11,6 +11,7 @@
   max-height: 88vh;
   overflow: hidden;
   background: #0d0d0d;
+  display: block;
 }
 
 .video-hero video {
@@ -20,41 +21,50 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  z-index: 0;
 }
 
-/* ── Gradient ────────────────────────────────────────────── */
-.video-hero-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, .85) 0%,
-    rgba(0, 0, 0, .30) 55%,
-    rgba(0, 0, 0, .08) 100%
-  );
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* ── Overlay content ─────────────────────────────────────── */
-.video-hero-overlay {
+/* ── Overlay — sits on top of video ─────────────────────── */
+.video-cta-overlay {
   position: absolute;
   inset: 0;
   z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 3rem 3.5rem;
-  gap: 1rem;
 }
 
-/* ── Timed reveal elements ───────────────────────────────── */
+/* ── Gradient darkens bottom of video ───────────────────── */
+.video-cta-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, .85) 0%,
+    rgba(0, 0, 0, .35) 55%,
+    rgba(0, 0, 0, .05) 100%
+  );
+}
+
+/* ── Content area — above gradient ──────────────────────── */
+.video-cta-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .9rem;
+  padding: 2.5rem 3rem 3rem;
+}
+
+/* ── Timed elements — hidden by default ─────────────────── */
 .vcta-el {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(16px);
   transition:
-    opacity  .70s cubic-bezier(.22, 1, .36, 1),
-    transform .70s cubic-bezier(.22, 1, .36, 1);
+    opacity  .65s cubic-bezier(.22, 1, .36, 1),
+    transform .65s cubic-bezier(.22, 1, .36, 1);
   pointer-events: none;
 }
 
@@ -65,11 +75,7 @@
 }
 
 /* ── Badge ───────────────────────────────────────────────── */
-.vh-badge {
-  display: inline-flex;
-}
-
-.vh-badge .badge {
+.vcta-badge-text {
   letter-spacing: .09em;
   font-size: .72rem !important;
   font-weight: 700;
@@ -79,29 +85,51 @@
 }
 
 /* ── Headline ────────────────────────────────────────────── */
-.vh-headline h1 {
+.vcta-headline-text {
   font-size: clamp(2rem, 4.5vw, 3.4rem);
   line-height: 1.08;
   letter-spacing: -.015em;
-  text-shadow: 0 3px 16px rgba(0, 0, 0, .45);
-  margin-bottom: .4rem;
+  text-shadow: 0 3px 16px rgba(0, 0, 0, .5);
+  margin-bottom: .35rem;
 }
 
-.vh-sub {
+.vcta-sub {
   font-size: clamp(.95rem, 1.6vw, 1.15rem);
-  opacity: .80;
+  opacity: .82;
   letter-spacing: .04em;
   text-shadow: 0 1px 8px rgba(0, 0, 0, .5);
 }
 
-/* ── CTA buttons ─────────────────────────────────────────── */
-.vh-cta-wrap {
-  display: inline-flex;
-  gap: .75rem;
+/* ── Chips ───────────────────────────────────────────────── */
+.vcta-chips-wrap {
+  display: flex;
   flex-wrap: wrap;
+  gap: .5rem;
 }
 
-.vh-cta-wrap .btn {
+.vcta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  background: rgba(255, 255, 255, .10);
+  border: 1px solid rgba(255, 255, 255, .20);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  padding: .28rem .75rem;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+/* ── CTA buttons ─────────────────────────────────────────── */
+#vcta-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+#vcta-cta .btn {
   font-weight: 700;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -110,20 +138,18 @@
   transition: transform .2s ease, box-shadow .2s ease;
 }
 
-.vh-cta-wrap .btn:hover {
+#vcta-cta .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 28px rgba(0, 0, 0, .5);
 }
 
 /* ── Progress bar ────────────────────────────────────────── */
 .video-progress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  position: relative;
+  z-index: 3;
   width: 100%;
   height: 3px;
   background: rgba(255, 255, 255, .15);
-  z-index: 3;
 }
 
 .video-progress-bar {
@@ -133,50 +159,22 @@
   transition: width .25s linear;
 }
 
-/* ── Meta chips (inside overlay) ────────────────────────── */
-.vh-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-}
-
-.vh-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  background: rgba(255, 255, 255, .10);
-  border: 1px solid rgba(255, 255, 255, .20);
-  color: #fff;
-  font-size: .72rem;
-  font-weight: 600;
-  letter-spacing: .05em;
-  padding: .28rem .7rem;
-  border-radius: 3px;
-  text-transform: uppercase;
-}
-
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .video-hero-overlay {
-    padding: 1.5rem;
+  .video-cta-content {
+    padding: 1.5rem 1.5rem 2rem;
+    gap: .7rem;
   }
-
-  .vh-headline h1 {
-    font-size: 1.7rem;
-  }
+  .vcta-headline-text { font-size: 1.7rem; }
+  .vcta-sub           { font-size: .9rem;  }
 }
 
 @media (max-width: 480px) {
-  .vh-headline h1 {
-    font-size: 1.35rem;
+  .video-cta-content {
+    padding: 1rem 1.25rem 1.5rem;
+    gap: .55rem;
   }
-
-  .video-hero-overlay {
-    padding: 1rem 1.25rem;
-    gap: .6rem;
-  }
-
-  .vh-chip {
-    font-size: .65rem;
-  }
+  .vcta-headline-text { font-size: 1.3rem; }
+  .vcta-chip          { font-size: .65rem; }
+  #vcta-cta .btn      { font-size: .78rem; padding: .5rem 1.2rem !important; }
 }
