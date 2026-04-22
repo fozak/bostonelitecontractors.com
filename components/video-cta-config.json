@@ -1,0 +1,67 @@
+{
+  "drone": {
+    "video": "/videos/drone-chestnut-hill.mp4",
+    "badge": "Chestnut Hill — In Progress",
+    "headline": "Building Boston's Future",
+    "subline": "Licensed · Insured · On Time",
+    "cta": "Get A Free Estimate",
+    "link": "#contact",
+    "timings": {
+      "badge": 1.5,
+      "headline": 3,
+      "cta": 5.5
+    }
+  },
+  "roofing": {
+    "video": "/videos/roofing-project.mp4",
+    "badge": "Roofing & Siding",
+    "headline": "Your Roof. Done Right.",
+    "subline": "Full Replacements · Repairs · Siding",
+    "cta": "Get A Free Estimate",
+    "link": "#contact",
+    "timings": {
+      "badge": 1,
+      "headline": 2.5,
+      "cta": 5
+    }
+  },
+  "interior": {
+    "video": "/videos/interior-remodel.mp4",
+    "badge": "Kitchen & Bath Remodeling",
+    "headline": "Spaces That Inspire",
+    "subline": "Custom Kitchens · Luxury Bathrooms · Full Renovations",
+    "cta": "View Our Work",
+    "link": "#gallery",
+    "timings": {
+      "badge": 1,
+      "headline": 3,
+      "cta": 6
+    }
+  },
+  "solar": {
+    "video": "/videos/solar-installation.mp4",
+    "badge": "Solar Energy Solutions",
+    "headline": "Power Your Home Smarter",
+    "subline": "Custom Solar Design · Full Installation · Grid Connection",
+    "cta": "Get A Free Estimate",
+    "link": "#contact",
+    "timings": {
+      "badge": 1,
+      "headline": 2.5,
+      "cta": 5
+    }
+  },
+  "landscaping": {
+    "video": "/videos/landscaping-project.mp4",
+    "badge": "Landscaping & Tree Services",
+    "headline": "Outside Is Everything",
+    "subline": "Tree Removal · Decks · Outdoor Design",
+    "cta": "Get A Free Estimate",
+    "link": "#contact",
+    "timings": {
+      "badge": 1,
+      "headline": 3,
+      "cta": 5.5
+    }
+  }
+}

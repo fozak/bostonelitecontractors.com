@@ -1,3 +1,5 @@
+//components.js - Dynamically load HTML components into elements with id="cmp-<name>"
+
 async function loadComponent(el) {
   const name = el.id.replace('cmp-', '');
   try {
