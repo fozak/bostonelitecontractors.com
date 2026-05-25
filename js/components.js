@@ -36,3 +36,57 @@ async function loadComponents() {
 }
 
 loadComponents();
+
+//=====posting 
+
+// Form submission to Google Sheets
+document.addEventListener('components:ready', function() {
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby7npWIxPMqwMa1lGqctzxCpLLNrUEF1rVoQ6ofdQrPRIkVj0PezCB2CT2v4d4QELWe7g/exec";
+
+  const form = document.getElementById("estimate-form");
+  if (!form) return;
+
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById("submit-btn");
+    const msg = document.getElementById("form-msg");
+    const fd  = new FormData(this);
+
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+    msg.style.display = "none";
+
+    try {
+      const res = await fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify({
+          name:    fd.get("name"),
+          email:   fd.get("email"),
+          phone:   fd.get("phone"),
+          service: fd.get("service"),
+          message: fd.get("message"),
+        }),
+      });
+
+      const json = await res.json();
+
+      if (json.result === "ok") {
+        form.reset();
+        msg.className = "alert alert-success";
+        msg.textContent = "Thank you! We'll be in touch shortly.";
+      } else {
+        throw new Error(json.error || "Unknown error");
+      }
+    } catch (err) {
+      msg.className = "alert alert-danger";
+      msg.textContent = "Something went wrong. Please try again or call us directly.";
+      console.error(err);
+    } finally {
+      msg.style.display = "block";
+      btn.disabled = false;
+      btn.textContent = "Request Free Estimate";
+    }
+  });
+});
